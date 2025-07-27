@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Professional Network</title>
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Main CSS -->
+    <link rel="stylesheet" href="css/notifications.css"> <!-- Additional CSS if needed -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="Homepage.html">Home</a></li>
+            <li><a href="Walkins.html">Walk-ins</a></li>
+            <li><a href="Jobs.html">Jobs</a></li>
+            <li><a href="Messages.html">Messages</a></li>
+            <li><a href="Notifications.html">Notifications</a></li>
+            <li><a href="Profile.html">Profile</a></li>
+            <li><a href="Chatrooms.html">Chatrooms</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Homepage Content -->
+        <main class="main-content">
+            <section class="feed">
+                <!-- Dynamic content will load here -->
+                <div id="content-loader">
+                    Loading your professional feed...
+                </div>
+            </section>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <img src="images/profile-placeholder.jpg" alt="Profile" class="profile-img">
+                <h3>Welcome Back</h3>
+                <p>Connect with your network</p>
+            </div>
+            <div class="trending">
+                <h4>Trending News</h4>
+                <!-- News items will load here -->
+            </div>
+        </aside>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script> <!-- Main JavaScript -->
+    <script src="js/homepage-search.js"></script> <!-- Search functionality -->
+    <script src="js/notifications.js"></script> <!-- Notifications system -->
+    
+    <!-- Initialize scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load default content
+            loadPage('Homepage.html');
+        });
+        
+        function loadPage(page) {
+            // Your content loading logic here
+        }
+    </script>
+</body>
+</html>
