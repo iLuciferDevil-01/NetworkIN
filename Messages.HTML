@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Messages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/messages.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-links">
+            <a href="Home.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="Messages.html"><i class="fas fa-envelope"></i><span>Messages</span></a>
+            <a href="Jobs.html"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+            <a href="Walkins.html"><i class="fas fa-walking"></i><span>Walkins</span></a>
+            <a href="Chatrooms.html"><i class="fas fa-comments"></i><span>Chat rooms</span></a>
+            <a href="Notifications.html"><i class="fas fa-bell"></i><span>Notifications</span></a>
+        </div>
+        <div class="profile">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="messages-header">
+            <h1 class="messages-title">Messages</h1>
+            <button class="new-message-btn">New Message</button>
+        </div>
+        
+        <div class="messages-container" id="messagesContainer">
+            <!-- Messages will be loaded here -->
+        </div>
+    </div>
+    
+    <script src="js/messages.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Chat Rooms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/chatrooms.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-links">
+            <a href="Home.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="Messages.html"><i class="fas fa-envelope"></i><span>Messages</span></a>
+            <a href="Jobs.html"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+            <a href="Walkins.html"><i class="fas fa-walking"></i><span>Walkins</span></a>
+            <a href="Chatrooms.html"><i class="fas fa-comments"></i><span>Chat rooms</span></a>
+            <a href="Notifications.html"><i class="fas fa-bell"></i><span>Notifications</span></a>
+        </div>
+        <div class="profile">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="chatrooms-header">
+            <h1 class="chatrooms-title">Chat Rooms</h1>
+            <button class="create-room-btn" id="createRoomBtn">
+                <i class="fas fa-plus"></i> Create Room
+            </button>
+        </div>
+        
+        <div class="chatrooms-container">
+            <div class="country-list" id="countryList">
+                <!-- Countries will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Type Selection Modal -->
+    <div class="chat-type-modal" id="chatTypeModal">
+        <div class="chat-type-content">
+            <h2 class="chat-type-title">Select Chat Room Type</h2>
+            <div class="chat-type-option" id="openChatOption">
+                <i class="fas fa-users"></i>
+                <h3>Open Chat Room</h3>
+                <p>Public forum where everyone can join and discuss</p>
+            </div>
+            <div class="chat-type-option" id="moderatedChatOption">
+                <i class="fas fa-user-shield"></i>
+                <h3>Moderator Operated</h3>
+                <p>Recruiter-led discussions about job opportunities</p>
+            </div>
+            <div class="close-modal">
+                <button class="close-btn" id="closeTypeModal">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Room Modal -->
+    <div class="chatroom-modal" id="chatroomModal">
+        <div class="chatroom-content">
+            <div class="chatroom-header">
+                <div class="chatroom-title" id="chatroomTitle">Open Chat: Bangalore</div>
+                <button class="close-chatroom" id="closeChatroom">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will appear here -->
+                <div class="message">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="message-user-img">
+                    <div class="message-content">
+                        <div class="message-user">Sarah Williams</div>
+                        <div class="message-text">Hello everyone! How's the job market in Bangalore these days?</div>
+                    </div>
+                </div>
+                <div class="message">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" class="message-user-img">
+                    <div class="message-content">
+                        <div class="message-user">Raj Patel</div>
+                        <div class="message-text">It's pretty good! Lots of openings in tech right now.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." id="messageInput">
+                <button class="send-btn" id="sendMessageBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/chatrooms.js"></script>
+</body>
+</html>

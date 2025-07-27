@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Jobs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/jobs.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-links">
+            <a href="Home.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="Messages.html"><i class="fas fa-envelope"></i><span>Messages</span></a>
+            <a href="Jobs.html"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+            <a href="Walkins.html"><i class="fas fa-walking"></i><span>Walkins</span></a>
+            <a href="Chatrooms.html"><i class="fas fa-comments"></i><span>Chat rooms</span></a>
+            <a href="Notifications.html"><i class="fas fa-bell"></i><span>Notifications</span></a>
+        </div>
+        <div class="profile">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="jobs-header">
+            <h1 class="jobs-title">Jobs</h1>
+        </div>
+        
+        <div class="job-search">
+            <input type="text" class="search-input" placeholder="Search for jobs, companies, or keywords">
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label">Job Type</label>
+                    <select class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="contract">Contract</option>
+                        <option value="internship">Internship</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <select class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="chennai">Chennai</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Experience</label>
+                    <select class="filter-select">
+                        <option value="">All Levels</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid Level</option>
+                        <option value="senior">Senior Level</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Salary Range</label>
+                    <select class="filter-select">
+                        <option value="">All Ranges</option>
+                        <option value="0-5">0-5 LPA</option>
+                        <option value="5-10">5-10 LPA</option>
+                        <option value="10-20">10-20 LPA</option>
+                        <option value="20-50">20-50 LPA</option>
+                        <option value="50+">50+ LPA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn apply-btn">Apply Filters</button>
+                <button class="filter-btn reset-btn">Reset</button>
+            </div>
+        </div>
+        
+        <div class="jobs-container" id="jobsContainer">
+            <!-- Jobs will be loaded here -->
+        </div>
+    </div>
+    
+    <script src="js/jobs.js"></script>
+</body>
+</html>

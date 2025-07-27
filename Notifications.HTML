@@ -1,0 +1,781 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .navbar {
+            background-color: #686CE9;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .brand {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-links i {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .notifications-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notifications-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .mark-read-btn {
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .notifications-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .notification-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .notification-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .notification-tab.active {
+            color: #686CE9;
+            border-bottom: 2px solid #686CE9;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .notification-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+        
+        .notification-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .notification-item.unread {
+            background-color: #f0f5ff;
+        }
+        
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #686CE9;
+            font-size: 18px;
+        }
+        
+        .notification-content {
+            flex-grow: 1;
+        }
+        
+        .notification-text {
+            font-size: 14px;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .notification-text a {
+            color: #686CE9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .notification-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .accept-btn {
+            background-color: #686CE9;
+            color: white;
+        }
+        
+        .decline-btn {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .no-notifications {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+        }
+        
+        /* Profile View Modal */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        
+        .profile-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .profile-title {
+            font-size: 16px;
+            color: #686CE9;
+            margin-bottom: 15px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .connect-btn {
+            padding: 8px 15px;
+            background-color: #686CE9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .message-btn {
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-links">
+            <a href="Home.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="Messages.html"><i class="fas fa-envelope"></i><span>Messages</span></a>
+            <a href="Jobs.html"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+            <a href="Walkins.html"><i class="fas fa-walking"></i><span>Walkins</span></a>
+            <a href="Chatrooms.html"><i class="fas fa-comments"></i><span>Chat rooms</span></a>
+            <a href="Notifications.html"><i class="fas fa-bell"></i><span>Notifications</span></a>
+        </div>
+        <div class="profile">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="notifications-header">
+            <h1 class="notifications-title">Notifications</h1>
+            <button class="mark-read-btn">Mark all as read</button>
+        </div>
+        
+        <div class="notifications-container">
+            <div class="notification-tabs">
+                <div class="notification-tab active" onclick="showNotificationTab('all')">All</div>
+                <div class="notification-tab" onclick="showNotificationTab('network')">Network</div>
+                <div class="notification-tab" onclick="showNotificationTab('jobs')">Jobs</div>
+                <div class="notification-tab" onclick="showNotificationTab('mentions')">Mentions</div>
+            </div>
+            
+            <!-- All Notifications Tab -->
+            <div id="all-notifications" class="tab-content active">
+                <!-- Notifications will be loaded here -->
+            </div>
+            
+            <!-- Network Notifications Tab -->
+            <div id="network-notifications" class="tab-content">
+                <!-- Network notifications will be loaded here -->
+            </div>
+            
+            <!-- Jobs Notifications Tab -->
+            <div id="jobs-notifications" class="tab-content">
+                <!-- Jobs notifications will be loaded here -->
+            </div>
+            
+            <!-- Mentions Notifications Tab -->
+            <div id="mentions-notifications" class="tab-content">
+                <!-- Mentions notifications will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Profile View Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-content">
+            <button class="close-modal" id="closeProfileModal">&times;</button>
+            <div class="profile-header">
+                <img src="" alt="Profile" class="profile-pic" id="modalProfilePic">
+                <h2 class="profile-name" id="modalProfileName"></h2>
+                <div class="profile-title" id="modalProfileTitle"></div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="modalConnections">500+</div>
+                        <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="modalFollowers">1.2K</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button class="connect-btn">Connect</button>
+                <button class="message-btn">Message</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Sample notifications data
+        const notifications = {
+            all: [
+                {
+                    id: 1,
+                    type: "profile-view",
+                    icon: "fas fa-eye",
+                    text: "<a href='#' class='profile-link' data-id='1'>Sarah Williams</a> viewed your profile",
+                    time: "10 minutes ago",
+                    read: false,
+                    user: {
+                        id: 1,
+                        name: "Sarah Williams",
+                        title: "Marketing Director at Brand Co",
+                        img: "https://randomuser.me/api/portraits/women/33.jpg",
+                        connections: "500+",
+                        followers: "1.2K"
+                    }
+                },
+                {
+                    id: 2,
+                    type: "connection-request",
+                    icon: "fas fa-user-plus",
+                    text: "<a href='#' class='profile-link' data-id='2'>Mike Johnson</a> wants to connect with you",
+                    time: "1 hour ago",
+                    read: false,
+                    hasActions: true,
+                    user: {
+                        id: 2,
+                        name: "Mike Johnson",
+                        title: "Senior Developer at Tech Solutions",
+                        img: "https://randomuser.me/api/portraits/men/45.jpg",
+                        connections: "1K+",
+                        followers: "2.5K"
+                    }
+                },
+                {
+                    id: 3,
+                    type: "job-alert",
+                    icon: "fas fa-briefcase",
+                    text: "New job matching your profile: <a href='Jobs.html'>Marketing Manager at Tech Solutions</a>",
+                    time: "3 hours ago",
+                    read: true
+                },
+                {
+                    id: 4,
+                    type: "post-like",
+                    icon: "fas fa-thumbs-up",
+                    text: "<a href='#' class='profile-link' data-id='3'>Emma Davis</a> liked your post about marketing strategies",
+                    time: "1 day ago",
+                    read: true,
+                    user: {
+                        id: 3,
+                        name: "Emma Davis",
+                        title: "HR Manager at People First",
+                        img: "https://randomuser.me/api/portraits/women/65.jpg",
+                        connections: "800+",
+                        followers: "1.8K"
+                    }
+                },
+                {
+                    id: 5,
+                    type: "anniversary",
+                    icon: "fas fa-calendar-alt",
+                    text: "Congratulations on your 2 year work anniversary at <a href='#'>Tech Solutions Inc</a>",
+                    time: "2 days ago",
+                    read: true
+                },
+                {
+                    id: 6,
+                    type: "connection-new",
+                    icon: "fas fa-user-friends",
+                    text: "<a href='#' class='profile-link' data-id='4'>Alex Turner</a> accepted your connection request",
+                    time: "3 days ago",
+                    read: true,
+                    user: {
+                        id: 4,
+                        name: "Alex Turner",
+                        title: "CEO at Startup Inc",
+                        img: "https://randomuser.me/api/portraits/men/75.jpg",
+                        connections: "2K+",
+                        followers: "5K"
+                    }
+                }
+            ],
+            network: [
+                {
+                    id: 1,
+                    type: "profile-view",
+                    icon: "fas fa-eye",
+                    text: "<a href='#' class='profile-link' data-id='1'>Sarah Williams</a> viewed your profile",
+                    time: "10 minutes ago",
+                    read: false,
+                    user: {
+                        id: 1,
+                        name: "Sarah Williams",
+                        title: "Marketing Director at Brand Co",
+                        img: "https://randomuser.me/api/portraits/women/33.jpg",
+                        connections: "500+",
+                        followers: "1.2K"
+                    }
+                },
+                {
+                    id: 2,
+                    type: "connection-request",
+                    icon: "fas fa-user-plus",
+                    text: "<a href='#' class='profile-link' data-id='2'>Mike Johnson</a> wants to connect with you",
+                    time: "1 hour ago",
+                    read: false,
+                    hasActions: true,
+                    user: {
+                        id: 2,
+                        name: "Mike Johnson",
+                        title: "Senior Developer at Tech Solutions",
+                        img: "https://randomuser.me/api/portraits/men/45.jpg",
+                        connections: "1K+",
+                        followers: "2.5K"
+                    }
+                },
+                {
+                    id: 4,
+                    type: "post-like",
+                    icon: "fas fa-thumbs-up",
+                    text: "<a href='#' class='profile-link' data-id='3'>Emma Davis</a> liked your post about marketing strategies",
+                    time: "1 day ago",
+                    read: true,
+                    user: {
+                        id: 3,
+                        name: "Emma Davis",
+                        title: "HR Manager at People First",
+                        img: "https://randomuser.me/api/portraits/women/65.jpg",
+                        connections: "800+",
+                        followers: "1.8K"
+                    }
+                },
+                {
+                    id: 6,
+                    type: "connection-new",
+                    icon: "fas fa-user-friends",
+                    text: "<a href='#' class='profile-link' data-id='4'>Alex Turner</a> accepted your connection request",
+                    time: "3 days ago",
+                    read: true,
+                    user: {
+                        id: 4,
+                        name: "Alex Turner",
+                        title: "CEO at Startup Inc",
+                        img: "https://randomuser.me/api/portraits/men/75.jpg",
+                        connections: "2K+",
+                        followers: "5K"
+                    }
+                }
+            ],
+            jobs: [
+                {
+                    id: 3,
+                    type: "job-alert",
+                    icon: "fas fa-briefcase",
+                    text: "New job matching your profile: <a href='Jobs.html'>Marketing Manager at Tech Solutions</a>",
+                    time: "3 hours ago",
+                    read: true
+                },
+                {
+                    id: 7,
+                    type: "job-application",
+                    icon: "fas fa-file-alt",
+                    text: "Your application for <a href='Jobs.html'>Product Marketing Specialist</a> has been viewed",
+                    time: "5 days ago",
+                    read: true
+                }
+            ],
+            mentions: [
+                {
+                    id: 8,
+                    type: "post-mention",
+                    icon: "fas fa-at",
+                    text: "<a href='#' class='profile-link' data-id='5'>Lisa Ray</a> mentioned you in a post about content marketing",
+                    time: "2 hours ago",
+                    read: false,
+                    user: {
+                        id: 5,
+                        name: "Lisa Ray",
+                        title: "Content Writer at Media House",
+                        img: "https://randomuser.me/api/portraits/women/25.jpg",
+                        connections: "300+",
+                        followers: "800"
+                    }
+                },
+                {
+                    id: 9,
+                    type: "comment-mention",
+                    icon: "fas fa-comment",
+                    text: "<a href='#' class='profile-link' data-id='6'>David Miller</a> mentioned you in a comment",
+                    time: "1 day ago",
+                    read: true,
+                    user: {
+                        id: 6,
+                        name: "David Miller",
+                        title: "Software Engineer at Tech Giant",
+                        img: "https://randomuser.me/api/portraits/men/35.jpg",
+                        connections: "700+",
+                        followers: "1.5K"
+                    }
+                }
+            ]
+        };
+        
+        // Function to load notifications
+        function loadNotifications(tab) {
+            const container = document.getElementById(`${tab}-notifications`);
+            const tabNotifications = notifications[tab];
+            
+            if (tabNotifications.length === 0) {
+                container.innerHTML = `
+                    <div class="no-notifications">
+                        <p>No notifications</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            tabNotifications.forEach(notification => {
+                const notificationElement = document.createElement('div');
+                notificationElement.className = `notification-item ${notification.read ? '' : 'unread'}`;
+                notificationElement.dataset.id = notification.id;
+                
+                let actionsHTML = '';
+                if (notification.hasActions) {
+                    actionsHTML = `
+                        <div class="notification-actions">
+                            <button class="action-btn accept-btn" data-id="${notification.id}">Accept</button>
+                            <button class="action-btn decline-btn" data-id="${notification.id}">Decline</button>
+                        </div>
+                    `;
+                }
+                
+                notificationElement.innerHTML = `
+                    <div class="notification-icon">
+                        <i class="${notification.icon}"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-text">${notification.text}</div>
+                        <div class="notification-time">${notification.time}</div>
+                        ${actionsHTML}
+                    </div>
+                `;
+                
+                container.appendChild(notificationElement);
+            });
+            
+            // Add click handlers for profile links
+            document.querySelectorAll('.profile-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const userId = this.getAttribute('data-id');
+                    const notification = notifications.all.find(n => n.user && n.user.id == userId) || 
+                                        notifications.network.find(n => n.user && n.user.id == userId) ||
+                                        notifications.mentions.find(n => n.user && n.user.id == userId);
+                    
+                    if (notification && notification.user) {
+                        showProfileModal(notification.user);
+                    }
+                });
+            });
+            
+            // Add click handlers for action buttons
+            document.querySelectorAll('.accept-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const notificationId = this.getAttribute('data-id');
+                    alert(`Connection request ${notificationId} accepted`);
+                    // In a real app, you would send this to your backend
+                });
+            });
+            
+            document.querySelectorAll('.decline-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const notificationId = this.getAttribute('data-id');
+                    alert(`Connection request ${notificationId} declined`);
+                    // In a real app, you would send this to your backend
+                });
+            });
+            
+            // Mark as read when clicked
+            document.querySelectorAll('.notification-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const notificationId = this.getAttribute('data-id');
+                    // In a real app, you would mark this as read in your backend
+                    this.classList.remove('unread');
+                });
+            });
+        }
+        
+        // Function to show notification tab
+        function showNotificationTab(tab) {
+            // Hide all tab contents and remove active class from tabs
+            document.querySelectorAll('.tab-content').forEach(tabContent => {
+                tabContent.classList.remove('active');
+            });
+            document.querySelectorAll('.notification-tab').forEach(tabElement => {
+                tabElement.classList.remove('active');
+            });
+            
+            // Show selected tab and set active class
+            document.getElementById(`${tab}-notifications`).classList.add('active');
+            document.querySelectorAll('.notification-tab').forEach(tabElement => {
+                if (tabElement.textContent.toLowerCase().includes(tab)) {
+                    tabElement.classList.add('active');
+                }
+            });
+            
+            // Load notifications if not already loaded
+            if (document.getElementById(`${tab}-notifications`).innerHTML === '') {
+                loadNotifications(tab);
+            }
+        }
+        
+        // Function to show profile modal
+        function showProfileModal(user) {
+            document.getElementById('modalProfilePic').src = user.img;
+            document.getElementById('modalProfileName').textContent = user.name;
+            document.getElementById('modalProfileTitle').textContent = user.title;
+            document.getElementById('modalConnections').textContent = user.connections;
+            document.getElementById('modalFollowers').textContent = user.followers;
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+        
+        // Close profile modal
+        document.getElementById('closeProfileModal').addEventListener('click', function() {
+            document.getElementById('profileModal').style.display = 'none';
+        });
+        
+        // Mark all as read
+        document.querySelector('.mark-read-btn').addEventListener('click', function() {
+            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                item.classList.remove('unread');
+            });
+            alert('All notifications marked as read');
+            // In a real app, you would update this in your backend
+        });
+        
+        // Initialize the page
+        window.onload = function() {
+            // Load all notifications by default
+            loadNotifications('all');
+            
+            // Set up tab switching
+            document.querySelectorAll('.notification-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.textContent.toLowerCase();
+                    showNotificationTab(tabName);
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === document.getElementById('profileModal')) {
+                    document.getElementById('profileModal').style.display = 'none';
+                }
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-links">
+            <a href="Home.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="Messages.html"><i class="fas fa-envelope"></i><span>Messages</span></a>
+            <a href="Jobs.html"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+            <a href="Walkins.html"><i class="fas fa-walking"></i><span>Walkins</span></a>
+            <a href="Chatrooms.html"><i class="fas fa-comments"></i><span>Chat rooms</span></a>
+            <a href="Notifications.html"><i class="fas fa-bell"></i><span>Notifications</span></a>
+        </div>
+        <div class="profile">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img" id="profileDropdownBtn">
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="#" class="dropdown-item" onclick="showTab('my-profile')"><i class="fas fa-user"></i> My Profile</a>
+                <a href="#" class="dropdown-item" onclick="showTab('my-posts')"><i class="fas fa-file-alt"></i> My Posts</a>
+                <a href="#" class="dropdown-item" onclick="showTab('languages')"><i class="fas fa-language"></i> Languages</a>
+                <a href="#" class="dropdown-item" onclick="showTab('settings')"><i class="fas fa-cog"></i> Settings</a>
+                <a href="Login.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic">
+            <h1 class="profile-name">John Doe</h1>
+            <div class="profile-title">Senior Marketing Manager at Tech Solutions Inc</div>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <div class="stat-number">542</div>
+                    <div class="stat-label">Connections</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,245</div>
+                    <div class="stat-label">Followers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">87</div>
+                    <div class="stat-label">Posts</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-sidebar">
+                <div id="aboutSection">
+                    <div class="section-title">
+                        About
+                        <button class="edit-btn" onclick="toggleEdit('about')"><i class="fas fa-edit"></i> Edit</button>
+                    </div>
+                    <div class="about-text" id="aboutText">
+                        Experienced marketing professional with 8+ years in digital marketing, brand strategy, and team leadership. Passionate about data-driven marketing and creating impactful campaigns that drive business growth.
+                    </div>
+                    
+                    <div class="edit-form" id="aboutEditForm">
+                        <div class="form-group">
+                            <label class="form-label">About</label>
+                            <textarea class="form-textarea" id="aboutInput">Experienced marketing professional with 8+ years in digital marketing, brand strategy, and team leadership. Passionate about data-driven marketing and creating impactful campaigns that drive business growth.</textarea>
+                        </div>
+                        <div class="form-buttons">
+                            <button class="cancel-btn" onclick="cancelEdit('about')">Cancel</button>
+                            <button class="save-btn" onclick="saveEdit('about')">Save</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="experienceSection">
+                    <div class="section-title">
+                        Experience
+                        <button class="edit-btn" onclick="toggleEdit('experience')"><i class="fas fa-edit"></i> Edit</button>
+                    </div>
+                    <div id="experienceList">
+                        <div class="experience-item">
+                            <div class="exp-title">Senior Marketing Manager</div>
+                            <div class="exp-company">Tech Solutions Inc</div>
+                            <div class="exp-duration">Jan 2019 - Present • 4 yrs 6 mos</div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="exp-title">Marketing Manager</div>
+                            <div class="exp-company">Brand Co</div>
+                            <div class="exp-duration">Mar 2016 - Dec 2018 • 2 yrs 10 mos</div>
+                        </div>
+                    </div>
+                    
+                    <div class="edit-form" id="experienceEditForm">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-input" value="Senior Marketing Manager">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Company</label>
+                            <input type="text" class="form-input" value="Tech Solutions Inc">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Duration</label>
+                            <input type="text" class="form-input" value="Jan 2019 - Present • 4 yrs 6 mos">
+                        </div>
+                        <div class="form-buttons">
+                            <button class="cancel-btn" onclick="cancelEdit('experience')">Cancel</button>
+                            <button class="save-btn" onclick="saveEdit('experience')">Save</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="educationSection">
+                    <div class="section-title">
+                        Education
+                        <button class="edit-btn" onclick="toggleEdit('education')"><i class="fas fa-edit"></i> Edit</button>
+                    </div>
+                    <div id="educationList">
+                        <div class="education-item">
+                            <div class="edu-degree">MBA in Marketing</div>
+                            <div class="edu-school">Indian Institute of Management, Bangalore</div>
+                            <div class="edu-duration">2014 - 2016</div>
+                        </div>
+                        <div class="education-item">
+                            <div class="edu-degree">B.Tech in Computer Science</div>
+                            <div class="edu-school">Delhi Technological University</div>
+                            <div class="edu-duration">2010 - 2014</div>
+                        </div>
+                    </div>
+                    
+                    <div class="edit-form" id="educationEditForm">
+                        <div class="form-group">
+                            <label class="form-label">Degree</label>
+                            <input type="text" class="form-input" value="MBA in Marketing">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">School</label>
+                            <input type="text" class="form-input" value="Indian Institute of Management, Bangalore">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Duration</label>
+                            <input type="text" class="form-input" value="2014 - 2016">
+                        </div>
+                        <div class="form-buttons">
+                            <button class="cancel-btn" onclick="cancelEdit('education')">Cancel</button>
+                            <button class="save-btn" onclick="saveEdit('education')">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-main">
+                <div class="profile-tabs">
+                    <div class="profile-tab active" onclick="showTab('my-profile')">My Profile</div>
+                    <div class="profile-tab" onclick="showTab('my-posts')">My Posts</div>
+                    <div class="profile-tab" onclick="showTab('languages')">Languages</div>
+                    <div class="profile-tab" onclick="showTab('settings')">Settings</div>
+                </div>
+                
+                <!-- My Profile Tab -->
+                <div id="my-profile-tab" class="tab-content active">
+                    <h3 class="section-title">Profile Overview</h3>
+                    <p>This is your complete profile overview. You can edit your information using the edit buttons in the sidebar.</p>
+                </div>
+                
+                <!-- My Posts Tab -->
+                <div id="my-posts-tab" class="tab-content">
+                    <div class="post">
+                        <div class="post-header">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="post-user-img">
+                            <div class="post-user-info">
+                                <h4>John Doe</h4>
+                                <p>Senior Marketing Manager • 2h ago</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Excited to share that our new product launch was a huge success! We reached 1M users in just 2 weeks. #marketing #success
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="post-image">
+                        <div class="post-actions">
+                            <div class="post-action">
+                                <i class="far fa-thumbs-up"></i>
+                                <span>245</span>
+                            </div>
+                            <div class="post-action">
+                                <i class="far fa-comment"></i>
+                                <span>32</span>
+                            </div>
+                            <div class="post-action">
+                                <i class="fas fa-share"></i>
+                                <span>12</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="post-header">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="post-user-img">
+                            <div class="post-user-info">
+                                <h4>John Doe</h4>
+                                <p>Senior Marketing Manager • 1d ago</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Just published a new article about digital marketing trends for 2023. Would love to hear your thoughts in the comments!
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action">
+                                <i class="far fa-thumbs-up"></i>
+                                <span>187</span>
+                            </div>
+                            <div class="post-action">
+                                <i class="far fa-comment"></i>
+                                <span>24</span>
+                            </div>
+                            <div class="post-action">
+                                <i class="fas fa-share"></i>
+                                <span>8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Languages Tab -->
+                <div id="languages-tab" class="tab-content">
+                    <h3 class="section-title">Language Preferences</h3>
+                    <div class="language-selector">
+                        <select class="language-select">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="ja">Japanese</option>
+                            <option value="zh">Chinese</option>
+                        </select>
+                    </div>
+                    <button class="save-btn">Save Language Preference</button>
+                </div>
+                
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <h3 class="section-title">Account Settings</h3>
+                    <div class="settings-option" onclick="alert('Account Preferences clicked')">
+                        <h4>Account Preferences</h4>
+                        <p>Manage your account settings and preferences</p>
+                    </div>
+                    <div class="settings-option" onclick="alert('Sign In & Security clicked')">
+                        <h4>Sign In & Security</h4>
+                        <p>Update your password and security settings</p>
+                    </div>
+                    <div class="settings-option" onclick="alert('Notifications clicked')">
+                        <h4>Notifications</h4>
+                        <p>Configure your notification preferences</p>
+                    </div>
+                    <div class="settings-option" onclick="alert('Help Center clicked')">
+                        <h4>Help Center</h4>
+                        <p>Get help with using NetworkIN</p>
+                    </div>
+                    <div class="settings-option" onclick="alert('Terms & Conditions clicked')">
+                        <h4>Terms & Conditions</h4>
+                        <p>Review our terms and conditions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/profile.js"></script>
+</body>
+</html>

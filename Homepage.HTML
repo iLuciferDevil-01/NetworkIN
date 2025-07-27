@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkIN - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">NetworkIN</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="nav-links">
+            <a href="Home.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="Messages.html"><i class="fas fa-envelope"></i><span>Messages</span></a>
+            <a href="Jobs.html"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+            <a href="Walkins.html"><i class="fas fa-walking"></i><span>Walkins</span></a>
+            <a href="Chatrooms.html"><i class="fas fa-comments"></i><span>Chat rooms</span></a>
+            <a href="Notifications.html"><i class="fas fa-bell"></i><span>Notifications</span></a>
+        </div>
+        <div class="profile">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img" id="profileDropdown">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- News Section -->
+            <div class="card">
+                <h3 class="section-header">What's happening today</h3>
+                <div class="news-container" id="newsContainer">
+                    <!-- News items will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="quick-actions">
+                    <div class="action-item" onclick="openPostModal()">
+                        <i class="fas fa-plus"></i>
+                        <span>Post</span>
+                    </div>
+                    <div class="action-item" onclick="window.location.href='Profile.html?edit=true'">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Edit Profile</span>
+                    </div>
+                    <div class="action-item" onclick="window.location.href='Followers.html'">
+                        <i class="fas fa-users"></i>
+                        <span>Your Followers</span>
+                    </div>
+                    <div class="action-item" onclick="window.location.href='Todo.html'">
+                        <i class="fas fa-tasks"></i>
+                        <span>To do list</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Top Posts -->
+            <div class="card">
+                <h3 class="section-header">Top Posts</h3>
+                <div class="posts-container" id="topPostsContainer">
+                    <!-- Top posts will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Ads Carousel -->
+            <div class="card">
+                <h3 class="section-header">Sponsored</h3>
+                <div class="ads-carousel">
+                    <div class="ad-item">Ad 1</div>
+                    <div class="ad-item">Ad 2</div>
+                    <div class="ad-item">Ad 3</div>
+                    <div class="ad-item">Ad 4</div>
+                </div>
+            </div>
+            
+            <!-- Recommended Jobs -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 class="section-header">Jobs recommended for you</h3>
+                    <span class="view-all" onclick="window.location.href='Jobs.html'">View all</span>
+                </div>
+                <div class="jobs-container" id="recommendedJobs">
+                    <!-- Jobs will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Suggested For You -->
+            <div class="card">
+                <h3 class="section-header">Suggested for you</h3>
+                <div class="posts-container" id="suggestedPostsContainer">
+                    <!-- Suggested posts will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Sponsored Ad -->
+            <div class="card">
+                <div class="sponsored-ad">
+                    Horizontal Sponsored Ad (1200x628)
+                </div>
+            </div>
+            
+            <!-- People You May Know -->
+            <div class="card">
+                <h3 class="section-header">People you may know</h3>
+                <div class="people-container" id="peopleContainer">
+                    <!-- People will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- More Posts -->
+            <div class="card">
+                <div class="posts-container" id="morePostsContainer">
+                    <!-- More posts will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Second Ads Carousel -->
+            <div class="card">
+                <div class="ads-carousel">
+                    <div class="ad-item">Ad 5</div>
+                    <div class="ad-item">Ad 6</div>
+                    <div class="ad-item">Ad 7</div>
+                    <div class="ad-item">Ad 8</div>
+                </div>
+            </div>
+            
+            <!-- Mixed Posts -->
+            <div class="card">
+                <div class="posts-container" id="mixedPostsContainer">
+                    <!-- Mixed posts will be loaded here via JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <!-- Sidebar content can be added here -->
+            <div class="card">
+                <h3 class="section-header">Upcoming Events</h3>
+                <p style="font-size: 14px; color: #666; text-align: center; padding: 20px 0;">
+                    No upcoming events
+                </p>
+            </div>
+            
+            <div class="card">
+                <h3 class="section-header">Trending Hashtags</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 0;">
+                    <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 12px; cursor: pointer;">#marketing</span>
+                    <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 12px; cursor: pointer;">#technology</span>
+                    <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 12px; cursor: pointer;">#jobs</span>
+                    <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 12px; cursor: pointer;">#networking</span>
+                    <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 12px; cursor: pointer;">#career</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Post Modal -->
+    <div id="postModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+        <div style="background-color: white; width: 90%; max-width: 600px; border-radius: 10px; padding: 20px;">
+            <h3 style="margin-bottom: 20px;">Create a Post</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+                <div>
+                    <h4 style="font-size: 14px;">John Doe</h4>
+                    <select style="font-size: 12px; padding: 3px 8px; border-radius: 4px; border: 1px solid #ddd;">
+                        <option>Anyone</option>
+                        <option>Connections only</option>
+                    </select>
+                </div>
+            </div>
+            <input type="text" placeholder="Headline" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            <textarea placeholder="What's on your mind?" style="width: 100%; height: 150px; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; resize: none;"></textarea>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-size: 14px;">Add Image</label>
+                <input type="file" accept="image/*">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button onclick="document.getElementById('postModal').style.display = 'none'" style="padding: 8px 15px; background-color: #f0f0f0; border: none; border-radius: 5px; cursor: pointer;">Cancel</button>
+                <button onclick="postContent()" style="padding: 8px 15px; background-color: #686CE9; color: white; border: none; border-radius: 5px; cursor: pointer;">Post</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/home.js"></script>
+</body>
+</html>
